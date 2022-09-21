@@ -42,7 +42,7 @@ t=[0:0.05:4];
 
 %% CONFIGURATION
 % Choix de la config de test parmi celles d�finies au-dessus (ou d'autres � votre discr�tion)
-q =Q3;
+q = Q1 ;
 
 %% SECTION 2.1
 % Matrices de passages homogenes
@@ -68,28 +68,41 @@ T34=[
     0           0           0   1];
 
 % Modele MGD
-T04 = T01 * T12 * T23 * T34
+T04 = T01 * T12 * T23 * T34 
 
 % Verfication du MGD
-v_test = T04 * [1   ; 0.5  ; 1   ; 1]
+v_test21 = T04 * [1   ; 0.5  ; 1   ; 1] ;
+q_test21 = [pi pi/2 -1 0] ;
+drawBM(q_test21)
+hold on
+drawFrame(T04,'R4',0.3) % repere scaled at 0.3
+hold off
+% ATTENTION TO4 depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
+
+
 
 %% SECTION 2.2
 
-% Calcul de la matrice de passage de R2 à Rc
+% Q2.2.1
+% Calcul de la matrice de passage de R2 à Rc (rotation typic autour de y2)
 T2C=[
-    1 0 0 L2+L3;
-    0 1 0  0 ;
-    0 0 1  0;
-    0 0 0 1 ]; 
+    cos(pi)  0  sin(pi)    L2 + L3    ; % cos(pi) car xc = -x2
+    0      
+    1   0           0       ; % 1 car yc=y2
+    -sin(pi) 0   cos(pi)    0       ; % -1 car zc=-z2
+    0       0   0           1       ]; 
     
-T0C= T01*T12*T2C % Matrice de passage homgene entre R0 et RC
-
+% Matrice de passage homgene entre R0 et RC
+T0C= T01 * T12 * T2C ; 
 
 % Affichage de l'orientation de Rc
 drawBM(Q1)
 hold on
-drawFrame(T0C,'RC')
+drawFrame(T0C,'RC',0.1) % repere scaled at 0.1
 hold off
+% ATTENTION TOC depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
+
+%Q2.2.2
 
 % D�termination de la situation de la pi�ce dans R0
 % Donn�es: position de la pi�ce dans Rc : (xP, yP, h), orientation : cf. �nonc�
