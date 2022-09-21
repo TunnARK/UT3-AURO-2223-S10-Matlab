@@ -13,7 +13,7 @@ L1 = 0.4;
 L2 = 0.4;
 L3 = 0.2;
 
-% Mesures renvoy�es par la cam�ra (position de la pi�ce � saisir dans Rc):
+% Mesures renvoyees par la camera (position de la piece a saisir dans Rc):
 xP = 0.5; yP = 0.2; 
 
 % Diff�rentes configurations de test pour les MGD/MGI
@@ -42,7 +42,7 @@ t=[0:0.05:4];
 
 %% CONFIGURATION
 % Choix de la config de test parmi celles d�finies au-dessus (ou d'autres � votre discr�tion)
-q = Q1 ;
+q = Q3 ;
 
 %% SECTION 2.1
 % Matrices de passages homogenes
@@ -68,15 +68,15 @@ T34=[
     0           0           0   1];
 
 % Modele MGD
-T04 = T01 * T12 * T23 * T34 
+T04 = T01 * T12 * T23 * T34 ;
 
 % Verfication du MGD
-v_test21 = T04 * [1   ; 0.5  ; 1   ; 1] ;
-q_test21 = [pi pi/2 -1 0] ;
-drawBM(q_test21)
-hold on
-drawFrame(T04,'R4',0.3) % repere scaled at 0.3
-hold off
+% v_test21 = T04 * [1   ; 0.5  ; 1   ; 1] ;
+% q_test21 = [pi pi/2 -1 0] ;
+% drawBM(q_test21) ;
+% hold on
+% drawFrame(T04,'R4',0.3) ; % repere scaled at 0.3
+% hold off
 % ATTENTION TO4 depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
 
 
@@ -87,8 +87,7 @@ hold off
 % Calcul de la matrice de passage de R2 à Rc (rotation typic autour de y2)
 T2C=[
     cos(pi)  0  sin(pi)    L2 + L3    ; % cos(pi) car xc = -x2
-    0      
-    1   0           0       ; % 1 car yc=y2
+    0      1   0           0       ; % 1 car yc=y2
     -sin(pi) 0   cos(pi)    0       ; % -1 car zc=-z2
     0       0   0           1       ]; 
     
@@ -96,15 +95,32 @@ T2C=[
 T0C= T01 * T12 * T2C ; 
 
 % Affichage de l'orientation de Rc
-drawBM(Q1)
-hold on
-drawFrame(T0C,'RC',0.1) % repere scaled at 0.1
-hold off
+% drawBM(Q1) ;
+% hold on
+% drawFrame(T0C,'RC',0.1) ; % repere scaled at 0.1
+% hold off
 % ATTENTION TOC depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
 
 %Q2.2.2
 
-% D�termination de la situation de la pi�ce dans R0
+% Determination de la situation de la piece dans R0 
+P_R0=T0C*[xP; yP ;h; 1] % position objet dans RO
+P_Rp=[xP; yP ;h; 1] % position objet donnee par la camera dans Rc
+
+% Validation
+% Rp=[
+%     1   0   0   P_R0(1)   ;
+%     0   1   0   P_R0(2)   ; 
+%     0   0   1   P_R0(3) ; 
+%     0   0   0   1    ];
+% drawBM(q)
+% hold on
+% drawFrame(Rp,'Rp',0.3)
+% drawFrame(T0C,'Rc',0.3)
+% hold off
+
+
+
 % Donn�es: position de la pi�ce dans Rc : (xP, yP, h), orientation : cf. �nonc�
 % Afficher la position (X,Y,Z) de la pi�ce dans R0 --> Fonction : plot3(X,Y,Z,'ro'); 
 % D�duire la situation de la pi�ce dans R0
