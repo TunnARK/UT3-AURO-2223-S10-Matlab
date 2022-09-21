@@ -42,29 +42,37 @@ t=[0:0.05:4];
 
 %% CONFIGURATION
 % Choix de la config de test parmi celles d�finies au-dessus (ou d'autres � votre discr�tion)
-q = Q1;
+q = [pi pi/2 -1 0];
 
 %% SECTION 2.1
-	% Utilisation de la fonction drawBM
-
-	% Calcul du MGD et afficher le rep�re outil
-	% Ne pas oublier hold on si n�cessaire pour la superposition des courbes
-
+% Matrices de passages homogenes
 T01=[
     cos(q(1))   -sin(q(1))  0   0 ;
     sin(q(1))   cos(q(1))   0   0 ;
-    0           0           1   0 ;
-    0           0           0   h]
+    0           0           1   h ;
+    0           0           0   1 ];
 T12=[
-    cos(q(2))   -sin(q(2))  0   L1 ;
-    sin(q(2))   cos(q(2))   0   0 ; 
-    0           0           1   0 ; 
-    0           0           0   1]
+    cos(q(2))   -sin(q(2))  0   L1  ;
+    sin(q(2))   cos(q(2))   0   0   ; 
+    0           0           1   0   ; 
+    0           0           0   1   ];
 T23=[
-    1   0   0   L1 ;
-    0   1   0   0 ; 
-    0   0   1   0 ; 
-    0   0   0   1]
+    1   0   0   L2   ;
+    0   1   0   0    ; 
+    0   0   1   q(3) ; % signe dans q(3) pour la longueur prismatique
+    0   0   0   1    ];
+T34=[
+    cos(q(4))   -sin(q(4))  0   0 ;
+    sin(q(4))   cos(q(4))   0   0 ; 
+    0           0           1   0 ;
+    0           0           0   1];
+
+% Modele MGD
+T04 = T01 * T12 * T23 * T34 
+
+% Verfication du MGD
+v_test = T04 * [1   ; 0.5  ; 1   ; 1]
+
 
 %% SECTION 2.2
 
@@ -75,7 +83,11 @@ T23=[
 	% Donn�es: position de la pi�ce dans Rc : (xP, yP, h), orientation : cf. �nonc�
   	% Afficher la position (X,Y,Z) de la pi�ce dans R0 --> Fonction : plot3(X,Y,Z,'ro'); 
 	% D�duire la situation de la pi�ce dans R0
-  
+  	% Utilisation de la fonction drawBM
+
+	% Calcul du MGD et afficher le rep�re outil
+	% Ne pas oublier hold on si n�cessaire pour la superposition des courbes
+
   	% Calcul du MGI et v�rification
   	% Affichage
 
