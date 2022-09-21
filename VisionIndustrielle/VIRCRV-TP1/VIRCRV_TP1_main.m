@@ -50,6 +50,21 @@ q = Q1;
 	% Calcul du MGD et afficher le rep�re outil
 	% Ne pas oublier hold on si n�cessaire pour la superposition des courbes
 
+T01=[
+    cos(q(1))   -sin(q(1))  0   0 ;
+    sin(q(1))   cos(q(1))   0   0 ;
+    0           0           1   0 ;
+    0           0           0   h]
+T12=[
+    cos(q(2))   -sin(q(2))  0   L1 ;
+    sin(q(2))   cos(q(2))   0   0 ; 
+    0           0           1   0 ; 
+    0           0           0   1]
+T23=[
+    1   0   0   L1 ;
+    0   1   0   0 ; 
+    0   0   1   0 ; 
+    0   0   0   1]
 
 %% SECTION 2.2
 
