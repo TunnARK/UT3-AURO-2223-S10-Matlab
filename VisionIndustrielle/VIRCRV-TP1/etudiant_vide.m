@@ -53,6 +53,7 @@ q = Q1;
 %%% SECTION 2.1
 	% Utilisation de la fonction drawBM
 
+
 	% Calcul du MGD et afficher le repère outil
 	% Ne pas oublier hold on si nécessaire pour la superposition des courbes
 
@@ -66,6 +67,7 @@ q = Q1;
 	% Données: position de la pièce dans Rc : (xP, yP, h), orientation : cf. énoncé
   	% Afficher la position (X,Y,Z) de la pièce dans R0 --> Fonction : plot3(X,Y,Z,'ro'); 
 	% Déduire la situation de la pièce dans R0
+ 
   
   	% Calcul du MGI et vérification
   	% Affichage
