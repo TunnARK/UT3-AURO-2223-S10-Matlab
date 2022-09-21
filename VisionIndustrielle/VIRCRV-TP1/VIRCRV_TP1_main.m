@@ -7,7 +7,7 @@ clc
 clear all
 close all
 
-% G�om�trie du robot
+% Geometrie du robot
 h = 0.8;
 L1 = 0.4;
 L2 = 0.4;
@@ -42,33 +42,12 @@ t=[0:0.05:4];
 
 %% CONFIGURATION
 % Choix de la config de test parmi celles d�finies au-dessus (ou d'autres � votre discr�tion)
-q = Q3 ;
+q = Q1 ;
 
 %% SECTION 2.1
-% Matrices de passages homogenes
-T01=[
-    cos(q(1))   -sin(q(1))  0   0 ;
-    sin(q(1))   cos(q(1))   0   0 ;
-    0           0           1   h ;
-    0           0           0   1 ];
-T12=[
-    cos(q(2))   -sin(q(2))  0   L1  ;
-    sin(q(2))   cos(q(2))   0   0   ; 
-    0           0           1   0   ; 
-    0           0           0   1   ];
-T23=[
-    1   0   0   L2   ;
-    0   1   0   0    ; 
-    0   0   1   q(3) ; % signe dans q(3) pour la longueur prismatique
-    0   0   0   1    ];
-T34=[
-    cos(q(4))   -sin(q(4))  0   0 ;
-    sin(q(4))   cos(q(4))   0   0 ; 
-    0           0           1   0 ;
-    0           0           0   1];
 
-% Modele MGD
-T04 = T01 * T12 * T23 * T34 ;
+% Calcul MGD
+T04q = calculT04(q);
 
 % Verfication du MGD
 % v_test21 = T04 * [1   ; 0.5  ; 1   ; 1] ;
@@ -84,15 +63,9 @@ T04 = T01 * T12 * T23 * T34 ;
 %% SECTION 2.2
 
 % Q2.2.1
-% Calcul de la matrice de passage de R2 à Rc (rotation typic autour de y2)
-T2C=[
-    cos(pi)  0  sin(pi)    L2 + L3    ; % cos(pi) car xc = -x2
-    0      1   0           0       ; % 1 car yc=y2
-    -sin(pi) 0   cos(pi)    0       ; % -1 car zc=-z2
-    0       0   0           1       ]; 
-    
+
 % Matrice de passage homgene entre R0 et RC
-T0C= T01 * T12 * T2C ; 
+T0C= calculT0C(q)
 
 % Affichage de l'orientation de Rc
 % drawBM(Q1) ;
@@ -101,36 +74,48 @@ T0C= T01 * T12 * T2C ;
 % hold off
 % ATTENTION TOC depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
 
-%Q2.2.2
+% Q2.2.2
 
 % Determination de la situation de la piece dans R0 
-P_R0=T0C*[xP; yP ;h; 1] % position objet dans RO
-P_Rp=[xP; yP ;h; 1] % position objet donnee par la camera dans Rc
+P_R0=T0C*[xP; yP ;h; 1]; % position objet dans RO
+P_Rp=[xP; yP ;h; 1]; % position objet donnee par la camera dans Rc
+
+% position objet donnee par la camera dans R0
+Rp=[
+    1   0   0   P_R0(1)   ; % pas de rotation sur xyz car meme orientation que R0
+    0   1   0   P_R0(2)   ; 
+    0   0   1   P_R0(3) ; 
+    0   0   0   1    ]
 
 % Validation
-% Rp=[
-%     1   0   0   P_R0(1)   ;
-%     0   1   0   P_R0(2)   ; 
-%     0   0   1   P_R0(3) ; 
-%     0   0   0   1    ];
 % drawBM(q)
 % hold on
-% drawFrame(Rp,'Rp',0.3)
-% drawFrame(T0C,'Rc',0.3)
+% drawFrame(Rp,'Rcp',0.3)
+% drawFrame(T0C,'Rop',0.3)
 % hold off
 
+% Q2.2.3
 
+% Calcul du MGI et verification
+Qsol=mgi_mitsu(Rp) ;
+Qsol1=Qsol(:,1) ; % sol1: configuration du robot pour atteindre la piece
+Qsol2=Qsol(:,2) ; % sol2: configuration du robot pour atteindre la piece
 
-% Donn�es: position de la pi�ce dans Rc : (xP, yP, h), orientation : cf. �nonc�
-% Afficher la position (X,Y,Z) de la pi�ce dans R0 --> Fonction : plot3(X,Y,Z,'ro'); 
-% D�duire la situation de la pi�ce dans R0
-% Utilisation de la fonction drawBM
+% Affichage MGI
+figure(1)
+subplot(1,2,1)
+drawBM(Qsol1)
+drawFrame(calculT04(Qsol1),'Routils',0.3)
+subplot(1,2,2)
+drawBM(Qsol2)
+drawFrame(calculT04(Qsol2),'Routils',0.3)
+
 
 % Calcul du MGD et afficher le rep�re outil
 % Ne pas oublier hold on si n�cessaire pour la superposition des courbes
 
 % Calcul du MGI et v�rification
-% Affichage
+
 
 
 %% SECTION 2.3
