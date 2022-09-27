@@ -94,7 +94,9 @@ Rp=[
 % drawFrame(T0C,'Rop',0.3)
 % hold off
 
-% Q2.2.3
+% Q2.2.3 cf compte rendu
+
+% Q2.2.4
 
 % Calcul du MGI et verification
 Qsol=mgi_mitsu(Rp) ;
@@ -111,19 +113,13 @@ drawBM(Qsol2)
 drawFrame(calculT04(Qsol2),'Routils',0.3)
 
 
-% Calcul du MGD et afficher le rep�re outil
-% Ne pas oublier hold on si n�cessaire pour la superposition des courbes
-
-% Calcul du MGI et v�rification
-
-
 
 %% SECTION 2.3
 
-	% D�termination des repr�sentations d'�tat des actionneurs
+% D�termination des repr�sentations d'�tat des actionneurs
 
-    
-	% R�ponse indicielle des actionneurs seuls
 
-	
-	% R�ponse indicielle de chaque actionneur et dessin de la trajectoire
+% R�ponse indicielle des actionneurs seuls
+
+
+% R�ponse indicielle de chaque actionneur et dessin de la trajectoire
