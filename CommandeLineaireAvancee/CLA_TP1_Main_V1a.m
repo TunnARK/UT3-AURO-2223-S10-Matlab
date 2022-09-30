@@ -1,6 +1,8 @@
 % ------------------------ %
-% CLA TP1 GABRIEL-RONK V1a %
+% CLA TP1 GABRIEL-RONK V1d %
 % ------------------------ %
+
+clear all; close all;
 
 %% VARIABALES
 
@@ -21,17 +23,58 @@ Qmax    = 12 * 10^(-5)      ; % m^3/s quand tension = +10V
 az13 = 0.4753 ;
 az32 = 0.4833 ;
 az20 = 0.9142 ;
-a13 = az13 * Sn * sqrt( 2*9.81 ) 
-a32 = az32 * Sn * sqrt( 2*9.81 ) 
-a20 = az20 * Sn * sqrt( 2*9.81 ) 
+a13 = az13 * Sn * sqrt( 2*9.81 ) ;
+a32 = az32 * Sn * sqrt( 2*9.81 ) ;
+a20 = az20 * Sn * sqrt( 2*9.81 ) ;
+
+
+% Point Equilibre
+
+H2eq = ( ( Q1eq + Q2eq )/a20 )^2 ; % H2eq = 0.0299
+H3eq = (Q1eq)^2/(a32)^2 + H2eq   ; % H3eq = 0.1084
+H1eq = (Q1eq)^2/(a13)^2 + H3eq   ; % H1eq = 0.1897
+
+% Point Equilibre Soni
+%H1eq = 0.01968
+%H2eq = 0.0316
+%H3eq = 0.1156
 
 % Resistance
-%R13 = sqrt( abs( H10 - H30 ) ) / a13 ;
-%R32 = sqrt( abs( H30 - H20 ) ) / a32 ;
-%R20 = sqrt( abs( H20 ) ) / a20 ;
+R13 = 2 * sqrt( abs( H1eq - H3eq ) ) / a13 ;
+R32 = 2 * sqrt( abs( H3eq - H2eq ) ) / a32 ;
+R20 = 2 * sqrt( abs( H2eq ) ) / a20        ;
 
-%% Point Equilibre
 
-H2eq = ( (Q1eq)^2 + (Q2eq)^2 )/(a20)^2
-H1eq = (Q1eq)^2/(a13)^2 + (Q1eq)^2/(a32)^2 + H2eq
-H3eq = (Q1eq)^2/(a32)^2 + H2eq
+%% Modele EE 
+
+A = [
+    -1/(S*R13)     1/(S*R13)                   0                     ;
+    1/(S*R13)      -1/(S*((1/R13)+(1/R32)))    1/(S*R32)             ;
+    0              1/(S*R32)                   -(1/S)*(1/R32+1/R20)  ];
+B = [
+    1/S      0     ; 
+    0        0     ; 
+    0        1/S   ];
+C = [1 0 0]     ;
+D = 0           ;
+
+EE = ss(A,B,C,D) ;
+
+%% Analyse de stabilite
+
+EEeig = eig(A) ;
+
+%% Commandabilite 
+
+% En considerant l entree q1
+rangCq1 = rank(ctrb(A,B(:,1))) ;
+
+% En considerant l entree q2
+rangCq2 = rank(ctrb(A,B(:,2))) ;
+
+% En considerant les deux entree
+rangC = rank(ctrb(A,B)) ;
+
+%% Indices de commandabilite
+
+Co = ctrb(A,B) ;
