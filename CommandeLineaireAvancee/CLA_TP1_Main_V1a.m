@@ -58,7 +58,7 @@ B = [
 C = [1 0 0]     ;
 D = 0           ;
 
-EE = ss(A,B,C,D) ;
+xOLu = ss(A,B,C,D) ;   % eq dynamique en BO
 
 %% Analyse de stabilite
 
@@ -78,3 +78,40 @@ rangC = rank(ctrb(A,B)) ;
 %% Indices de commandabilite
 
 Co = ctrb(A,B) ;
+
+%control_reza(A,B,C,D) ;
+
+%% RESULT CONTROL REZA
+%
+% Controllability Indices is:
+%      2
+%      1
+% 
+% Controllability_Index is:
+%      2
+% 
+% Partial_Controllability_Matrix is:
+%    64.9351         0   -0.7787         0
+%          0         0    0.7787    0.8052
+%          0   64.9351         0   -3.2745
+% 
+% The System Is Observable
+% Obsevability Indices is:
+%      3
+% 
+% Observability_Index is:
+%      3
+% 
+% Partial Observibility Matix is:
+%    1.0e+03 *
+% 
+%     0.0010   -0.0000    0.0000
+%          0    0.0000   -2.0731
+%          0         0    0.0000
+% 
+% The system is Output Controllable
+% The system Is Functional Output Controllable
+
+%% TRANSFER FUNCTION
+
+FTxOLu  = tf(xOLu)      % transfer function
