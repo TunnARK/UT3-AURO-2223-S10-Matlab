@@ -24,27 +24,47 @@ mu=2;
 A = [
     0   ,   1   ;
     delta1/(1+delta2)   ,   delta1;
-]
+];
 
 
 
 
 vb=1;
 
-%% Construction des LMI pour le polytope
-X = sdpvar(2,2,'symmetric')
-R = sdpvar(1,2)
-quiz=[X>=eye(2)];
-for v=1:vb
-    quiz=quiz+[[ A*X+Bu*R+(A*X+Bu*R)' , Bw , X*Cz' ;
-    Bw', -mu^2, Dzw';
-    Cz*X, Dzw, -1 ]<= zeros(4,4)];
-end
-%% Résolution
-res=optimize(quiz)
-%% Analyse du résultat
-checkset(quiz)
-%% Si faisable obtention du résultat
-Xsol=double(X)
-Rsol=double(R)
+% %% Construction des LMI pour le polytope
+% X = sdpvar(2,2,'symmetric')
+% R = sdpvar(1,2)
+% quiz=[X>=eye(2)];
+% for v=1:vb
+%     quiz=quiz+[ A*X+Bu*R+(A*X+Bu*R)' , Bw , X*Cz' ;
+%     Bw', -mu^2, Dzw';
+%     Cz*X, Dzw, -1 <= zeros(4,4)];
+% end
+% %% Résolution
+% res=optimize(quiz)
+% %% Analyse du résultat
+% checkset(quiz)
+% %% Si faisable obtention du résultat
+% Xsol=double(X)
+% Rsol=double(R)
 
+
+%% Etude de stabilite avec le retour d etat
+delta1=1/2;
+delta2=1/2;
+
+
+delta=[delta1 , 0 ; 0, delta2]
+
+Hi_delta=norm(delta)
+Aprime=[0 1; 0 0];
+K=[12, 5; 0 0];
+B=[0 0; 1 1];
+
+Ad=Aprime-(B*K);
+Bd=[0 0 0; 1 1 0];
+Cd=[0 1 ; 0 0; 0 0];
+Dd=[0 0 0 ; -1 -1 1 ; 0 0 0 ];
+
+Sys=ss(Ad,Bd,Cd,Dd)
+norm(Sys)
