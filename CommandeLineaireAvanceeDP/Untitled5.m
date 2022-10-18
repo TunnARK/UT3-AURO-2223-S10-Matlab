@@ -3,7 +3,7 @@
 % https://yalmip.github.io/download/
 %
 % Et nécessite d'avoir installé un solveur 
-% SemiDefinite Programming
+% SemiDefinite Programming 
 % Il y en a un dans la Robust Control Toolbox de MATLAB
 % et d'autres libres listés ici
 % https://yalmip.github.io/allsolvers/
