@@ -49,14 +49,14 @@ q = Q1 ;
 % Calcul MGD
 T04q = calculT04(q);
 
-% Verfication du MGD
-% v_test21 = T04 * [1   ; 0.5  ; 1   ; 1] ;
-% q_test21 = [pi pi/2 -1 0] ;
-% drawBM(q_test21) ;
-% hold on
-% drawFrame(T04,'R4',0.3) ; % repere scaled at 0.3
-% hold off
-% ATTENTION TO4 depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
+%Verfication du MGD
+v_test21 = T04q * [1   ; 0.5  ; 1   ; 1] ;
+q_test21 = [pi pi/2 -1 0] ;
+drawBM(q_test21) ;
+hold on
+drawFrame(T04q,'R4',0.3) ; % repere scaled at 0.3
+hold off
+%ATTENTION TO4 depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
 
 
 
@@ -120,11 +120,11 @@ Qsol2=Qsol(:,2) ; % sol2: configuration du robot pour atteindre la piece
 	% D�termination des repr�sentations d'�tat des actionneurs
     
     A1=[0 1 ; 0 -B/Jeff1];
-    B1=[0; Km/R*Jeff1];
+    B1=[0; Km/(R*Jeff1)];
     C1=[1 0];
     
     A2=[0 1 ; 0 -B/Jeff2];
-    B2=[0; Km/R*Jeff2];
+    B2=[0; Km/(R*Jeff2)];
     C2=[1 0];
     
     D=0;
@@ -138,30 +138,30 @@ Qsol2=Qsol(:,2) ; % sol2: configuration du robot pour atteindre la piece
         
 	% R�ponse indicielle des actionneurs seuls
        
-%subplot(1,2,1)
-%plot(q1_star*step(EE1))
-%subplot(1,2,2)
-%plot(q2_star*step(EE2))
+subplot(1,2,1)
+plot(q1_star*step(EE1))
+subplot(1,2,2)
+plot(q2_star*step(EE2))
 
         
     %Calcul du retour d etat
     
 Ar1=A1-B1*K1;
-Br1=B1*N1*q1_star;
+Br1=B1*N1;
 
 Ar2=A2-B2*K2;
-Br2=B2*N2*q2_star;
+Br2=B2*N2;
 
 retour_et1=ss(Ar1,Br1,C1,D);
 retour_et2=ss(Ar2,Br2,C2,D);
 
-% subplot(1,2,1)
-% plot(q1_star*step(retour_et1))
-% subplot(1,2,2)
-% plot(q2_star*step(retour_et2))
+subplot(1,2,1)
+plot(q1_star*step(retour_et1))
+subplot(1,2,2)
+plot(q2_star*step(retour_et2))
 	
 	% R�ponse indicielle de chaque actionneur et dessin de la trajectoire
     
 
-drawTraj(retour_et1,retour_et2,q1_star,q2_star,[0:20],0.8,P_R0(1),P_R0(2),P_R0(3),1)
+drawTraj(retour_et1,retour_et2,q1_star,q2_star,t,h,P_R0(1),P_R0(2),P_R0(3),1)
     
