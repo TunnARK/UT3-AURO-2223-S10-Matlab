@@ -50,12 +50,12 @@ q = Q1 ;
 T04q = calculT04(q);
 
 % Verfication du MGD
-% v_test21 = T04 * [1   ; 0.5  ; 1   ; 1] ;
-% q_test21 = [pi pi/2 -1 0] ;
-% drawBM(q_test21) ;
-% hold on
-% drawFrame(T04,'R4',0.3) ; % repere scaled at 0.3
-% hold off
+v_test21 = T04 * [1   ; 0.5  ; 1   ; 1] ;
+q_test21 = [pi pi/2 -1 0] ;
+drawBM(q_test21) ;
+hold on
+drawFrame(T04,'R4',0.3) ; % repere scaled at 0.3
+hold off
 % ATTENTION TO4 depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
 
 
@@ -68,10 +68,10 @@ T04q = calculT04(q);
 T0C= calculT0C(q)
 
 % Affichage de l'orientation de Rc
-% drawBM(Q1) ;
-% hold on
-% drawFrame(T0C,'RC',0.1) ; % repere scaled at 0.1
-% hold off
+drawBM(Q1) ;
+hold on
+drawFrame(T0C,'RC',0.1) ; % repere scaled at 0.1
+hold off
 % ATTENTION TOC depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
 
 % Q2.2.2
@@ -88,11 +88,11 @@ Rp=[
     0   0   0   1    ]
 
 % Validation
-% drawBM(q)
-% hold on
-% drawFrame(Rp,'Rcp',0.3)
-% drawFrame(T0C,'Rop',0.3)
-% hold off
+drawBM(q)
+hold on
+drawFrame(Rp,'Rcp',0.3)
+drawFrame(T0C,'Rop',0.3)
+hold off
 
 % Q2.2.3 cf compte rendu
 
