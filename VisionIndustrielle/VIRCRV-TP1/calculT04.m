@@ -1,6 +1,6 @@
 function [T04] = calculT04(q)
 
-% G�om�trie du robot
+% Geometrie du robot
 h = 0.8;
 L1 = 0.4;
 L2 = 0.4;
