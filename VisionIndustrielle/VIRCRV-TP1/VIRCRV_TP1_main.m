@@ -16,14 +16,14 @@ L3 = 0.2;
 % Mesures renvoyees par la camera (position de la piece a saisir dans Rc):
 xP = 0.5; yP = 0.2; 
 
-% Diff�rentes configurations de test pour les MGD/MGI
+% Differentes configurations de test pour les MGD/MGI
 Q1 = zeros(1,4);
 Q2 = [pi/2 0 0 0];
 Q3 = [0 pi/2 0 0];
 Q4 = [0 0 -0.5 pi/2];
 Q5 = [pi/2 pi/2 -0.5 0];
 
-% Param�tres des actionneurs
+% Parametres des actionneurs
 r = 1/200; % rapport de r�duction
 Km = 0.3; % constante de couple
 R = 1; % resistance induit
@@ -41,7 +41,7 @@ N2=0.3;
 t=[0:0.05:4];
 
 %% CONFIGURATION
-% Choix de la config de test parmi celles d�finies au-dessus (ou d'autres � votre discr�tion)
+% Choix de la config de test parmi celles d�finies au-dessus (ou d'autres a votre discretion)
 q = Q1 ;
 
 %% SECTION 2.1
@@ -116,10 +116,10 @@ drawFrame(calculT04(Qsol2),'Routils',0.3)
 
 %% SECTION 2.3
 
-% D�termination des repr�sentations d'�tat des actionneurs
+% Determination des representations d'etat des actionneurs
 
 
-% R�ponse indicielle des actionneurs seuls
+% Reponse indicielle des actionneurs seuls
 
 
-% R�ponse indicielle de chaque actionneur et dessin de la trajectoire
+% Reponse indicielle de chaque actionneur et dessin de la trajectoire

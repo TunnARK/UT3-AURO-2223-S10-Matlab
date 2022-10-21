@@ -104,17 +104,6 @@ Qsol1=Qsol(:,1) ; % sol1: configuration du robot pour atteindre la piece
 Qsol2=Qsol(:,2) ; % sol2: configuration du robot pour atteindre la piece
 
 % Affichage MGI
-<<<<<<< HEAD
-figure(1)
-subplot(1,2,1)
-drawBM(Qsol1)
-drawFrame(calculT04(Qsol1),'Routils',0.3)
-subplot(1,2,2)
-drawBM(Qsol2)
-drawFrame(calculT04(Qsol2),'Routils',0.3)
-
-
-=======
 % figure(1)
 % subplot(1,2,1)
 % drawBM(Qsol1)
@@ -122,19 +111,12 @@ drawFrame(calculT04(Qsol2),'Routils',0.3)
 % subplot(1,2,2)
 % drawBM(Qsol2)
 % drawFrame(calculT04(Qsol2),'Routils',0.3)
->>>>>>> be947793e72c6b07edb11564827951f71a8f3882
 
 %% SECTION 2.3
 
 % D�termination des repr�sentations d'�tat des actionneurs
 
 
-<<<<<<< HEAD
-% R�ponse indicielle des actionneurs seuls
-
-
-% R�ponse indicielle de chaque actionneur et dessin de la trajectoire
-=======
 	% D�termination des repr�sentations d'�tat des actionneurs
     
     A1=[0 1 ; 0 -B/Jeff1];
@@ -183,4 +165,3 @@ retour_et2=ss(Ar2,Br2,C2,D);
 
 drawTraj(retour_et1,retour_et2,q1_star,q2_star,[0:20],0.8,P_R0(1),P_R0(2),P_R0(3),1)
     
->>>>>>> be947793e72c6b07edb11564827951f71a8f3882
