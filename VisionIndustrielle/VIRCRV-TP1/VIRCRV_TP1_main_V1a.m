@@ -136,12 +136,12 @@ Qsol2=Qsol(:,2) ; % sol2: configuration du robot pour atteindre la piece
     q2_star=Qsol1(2);
     
         
-	% R�ponse indicielle des actionneurs seuls
+	% Reponse indicielle des actionneurs seuls
        
 subplot(1,2,1)
-plot(q1_star*step(EE1))
+plot(step(q1_star*EE1))
 subplot(1,2,2)
-plot(q2_star*step(EE2))
+plot(step(q2_star*EE2))
 
         
     %Calcul du retour d etat
@@ -156,9 +156,9 @@ retour_et1=ss(Ar1,Br1,C1,D);
 retour_et2=ss(Ar2,Br2,C2,D);
 
 subplot(1,2,1)
-plot(q1_star*step(retour_et1))
+plot(step(q1_star*retour_et1))
 subplot(1,2,2)
-plot(q2_star*step(retour_et2))
+plot(step(q2_star*retour_et2))
 	
 	% R�ponse indicielle de chaque actionneur et dessin de la trajectoire
     
