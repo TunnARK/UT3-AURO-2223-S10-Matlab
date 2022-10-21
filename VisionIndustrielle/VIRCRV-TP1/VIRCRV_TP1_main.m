@@ -47,14 +47,15 @@ q = Q1 ;
 %% SECTION 2.1
 
 % Calcul MGD
-T04q = calculT04(q);
+T04 = calculT04(q);
 
 % Verfication du MGD
-v_test21 = T04 * [1   ; 0.5  ; 1   ; 1] ;
 q_test21 = [pi pi/2 -1 0] ;
+T04q = calculT04(q_test21);
+v_test21 = T04q * [1   ; 0.5  ; 1   ; 1] ;
 drawBM(q_test21) ;
 hold on
-drawFrame(T04,'R4',0.3) ; % repere scaled at 0.3
+drawFrame(T04q,'R4',0.3) ; % repere scaled at 0.3
 hold off
 % ATTENTION TO4 depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
 
@@ -68,10 +69,10 @@ hold off
 T0C= calculT0C(q)
 
 % Affichage de l'orientation de Rc
-drawBM(Q1) ;
-hold on
-drawFrame(T0C,'RC',0.1) ; % repere scaled at 0.1
-hold off
+% drawBM(Q1) ;
+% hold on
+% drawFrame(T0C,'RC',0.1) ; % repere scaled at 0.1
+% hold off
 % ATTENTION TOC depend de la config q donc il faut que q soit le meme que le parametre donne a drawBM
 
 % Q2.2.2
@@ -88,11 +89,11 @@ Rp=[
     0   0   0   1    ]
 
 % Validation
-drawBM(q)
-hold on
-drawFrame(Rp,'Rcp',0.3)
-drawFrame(T0C,'Rop',0.3)
-hold off
+% drawBM(q)
+% hold on
+% drawFrame(Rp,'Rcp',0.3)
+% drawFrame(T0C,'Rop',0.3)
+% hold off
 
 % Q2.2.3 cf compte rendu
 
@@ -104,13 +105,13 @@ Qsol1=Qsol(:,1) ; % sol1: configuration du robot pour atteindre la piece
 Qsol2=Qsol(:,2) ; % sol2: configuration du robot pour atteindre la piece
 
 % Affichage MGI
-figure(1)
-subplot(1,2,1)
-drawBM(Qsol1)
-drawFrame(calculT04(Qsol1),'Routils',0.3)
-subplot(1,2,2)
-drawBM(Qsol2)
-drawFrame(calculT04(Qsol2),'Routils',0.3)
+% figure(1)
+% subplot(1,2,1)
+% drawBM(Qsol1)
+% drawFrame(calculT04(Qsol1),'Routils',0.3)
+% subplot(1,2,2)
+% drawBM(Qsol2)
+% drawFrame(calculT04(Qsol2),'Routils',0.3)
 
 
 
