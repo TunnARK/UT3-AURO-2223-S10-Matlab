@@ -1,6 +1,6 @@
 % VIRCRV TP1 Grp2 Gabriel/Ronk
-% Version 0.10
-% Last modified 2022/09/21 00:15
+% Version 0.20
+% Last modified 2022/10/21 11:10
 
 %% INITIALISATION
 clc
@@ -24,7 +24,7 @@ Q4 = [0 0 -0.5 pi/2];
 Q5 = [pi/2 pi/2 -0.5 0];
 
 % Parametres des actionneurs
-r = 1/200; % rapport de r�duction
+r = 1/200; % rapport de reduction
 Km = 0.3; % constante de couple
 R = 1; % resistance induit
 B = 1/80; % coefficient de frottement
@@ -41,7 +41,7 @@ N2=0.3;
 t=[0:0.05:4];
 
 %% CONFIGURATION
-% Choix de la config de test parmi celles d�finies au-dessus (ou d'autres a votre discretion)
+% Choix de la config de test parmi celles definies au-dessus (ou d'autres a votre discretion)
 q = Q1 ;
 
 %% SECTION 2.1
