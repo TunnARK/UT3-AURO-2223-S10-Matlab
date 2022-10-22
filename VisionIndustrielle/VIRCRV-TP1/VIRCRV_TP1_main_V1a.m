@@ -114,10 +114,10 @@ Qsol2=Qsol(:,2) ; % sol2: configuration du robot pour atteindre la piece
 
 %% SECTION 2.3
 
-% D�termination des repr�sentations d'�tat des actionneurs
+% Determination des representations d etat des actionneurs
 
 
-	% D�termination des repr�sentations d'�tat des actionneurs
+	% Determination des repr�sentations d etat des actionneurs
     
     A1=[0 1 ; 0 -B/Jeff1];
     B1=[0; Km/(R*Jeff1)];
@@ -160,7 +160,7 @@ plot(step(q1_star*retour_et1))
 subplot(1,2,2)
 plot(step(q2_star*retour_et2))
 	
-	% R�ponse indicielle de chaque actionneur et dessin de la trajectoire
+	% Reponse indicielle de chaque actionneur et dessin de la trajectoire
     
 
 drawTraj(retour_et1,retour_et2,q1_star,q2_star,t,h,P_R0(1),P_R0(2),P_R0(3),1)
