@@ -119,26 +119,26 @@ drawFrame(calculT04(Qsol2),'Routils',0.3)
 % Determination des representations d etat des actionneurs
 
 
-	% Determination des repr�sentations d etat des actionneurs
-    
-    A1=[0 1 ; 0 -B/Jeff1];
-    B1=[0; Km/(R*Jeff1)];
-    C1=[1 0];
-    
-    A2=[0 1 ; 0 -B/Jeff2];
-    B2=[0; Km/(R*Jeff2)];
-    C2=[1 0];
-    
-    D=0;
-    
-    EE1=ss(A1,B1,C1,D);
-    EE2=ss(A2,B2,C2,D);
-    
-    q1_star=Qsol1(1);
-    q2_star=Qsol1(2);
-    
+% Determination des representations d etat des actionneurs
+
+A1=[0 1 ; 0 -B/Jeff1];
+B1=[0; Km/(R*Jeff1)];
+C1=[1 0];
+
+A2=[0 1 ; 0 -B/Jeff2];
+B2=[0; Km/(R*Jeff2)];
+C2=[1 0];
+
+D=0;
+
+EE1=ss(A1,B1,C1,D);
+EE2=ss(A2,B2,C2,D);
+
+q1_star=Qsol1(1);
+q2_star=Qsol1(2);
+
         
-	% Reponse indicielle des actionneurs seuls
+% Reponse indicielle des actionneurs seuls
        
 subplot(1,2,1)
 plot(step(q1_star*EE1))
@@ -146,7 +146,7 @@ subplot(1,2,2)
 plot(step(q2_star*EE2))
 
         
-    %Calcul du retour d etat
+%Calcul du retour d etat
     
 Ar1=A1-B1*K1;
 Br1=B1*N1;
@@ -162,7 +162,7 @@ plot(step(q1_star*retour_et1))
 subplot(1,2,2)
 plot(step(q2_star*retour_et2))
 	
-	% Reponse indicielle de chaque actionneur et dessin de la trajectoire
+% Reponse indicielle de chaque actionneur et dessin de la trajectoire
     
 
 drawTraj(retour_et1,retour_et2,q1_star,q2_star,t,h,P_R0(1),P_R0(2),P_R0(3),1)
