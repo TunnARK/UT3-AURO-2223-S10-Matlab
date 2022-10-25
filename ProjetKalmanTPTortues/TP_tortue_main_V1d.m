@@ -6,7 +6,7 @@
 
 clc
 close all
-clean all
+clear all
 
 %% Remplissage des donnnees 
 load turt8.data
@@ -17,16 +17,25 @@ load turt8.data
 
 % Initialisation
 
-x_obsv=mX0; 
-P_obsv=PX0;
+x_kk=mX0; 
+Pkk=PX0;
+H=eye(2,4);
+xk1k=[];
+P_k1k=[];
 
-for k=1:(N-1)
-    F_predi=[1,0, (T(k+1)-T(k)), 0; 0, 1, 0, (T(k+1)-T(k)); 0,0,1,0; 0,0,0,1];
-    G_predi=[(T(k+1)-T(k)),0 ; 0,(T(k+1)-T(k)); 0,0; 0,0];
+
+for i=1:(N-1)
+    F_k=[1,0, (T(i+1)-T(i)), 0; 0, 1, 0, (T(i+1)-T(i)); 0,0,1,0; 0,0,0,1];
+    G_k=[(T(i+1)-T(i)),0 ; 0,(T(i+1)-T(i)); 0,0; 0,0];
 
     % Prediction
-    x_predi(:,k+1)=F_predi*x_obsv(:,k)+G_predi*u(:,k);
-    P_predi(k+4:k+7,:)=F_predi*P_obsv(k:k+3,:)*transpose(F_predi)+Qw %bruit de dynamqiue suppose staionnaire
+    xk1k=[xk1k,F_k*x_kk(:,i)+G_k*u(:,i)];
+    P_k1k=[P_k1k,F_k*Pkk(:,i:i+3)*F_k'+Qw]; %bruit de dynamique suppose stationnaire
+%     
+%     % Mise à jour
+%     K(:,i+1)=P_k1k(:,i:i+3)*H'*inv((Rv+H*Pkk(:,i:i+3)*H')); %bruit de mesure suppose stationnaire
+%     xk1k(:,i+1)=x(:,i+1)+K(:,i+1)*(Z(:,i+1)-H*x_k1k(:,i));
+%     P_k1k(:,i+3:)=Pkk(:,i:i+3)- K(:,i+1)*H*Pkk(:,i:i+3);
     
     
     
