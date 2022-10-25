@@ -52,3 +52,31 @@ for k=2:N
     Xest{k} = Xpred{k} + Gain{k} * (Z(:, k) - H * Xpred{k}) ; % Eq6
     Pest{k} = Ppred{k} - Gain{k} * H * Ppred{k}             ; % Eq7
 end
+
+% Extraction des vecteurs
+for k=1:N
+   % Estimation de la postion
+   vestx(k) = Xest{k}(1,1) ;
+   vesty(k) = Xest{k}(2,1) ;
+   
+   % Matrice de covariance
+   vestpx(k) = Pest{k}(1,1) ;
+   vestpy(k) = Pest{k}(2,1) ;
+end
+
+%% Plot Xreel and Xestime
+figure(3)
+hold on
+p1 = plot(X(1,:), X(2,:));
+p2 = plot(vestx(:), vesty(:));
+legend([p1 p2],'Xreel','Xestime');
+title("Comparaison entre trajectoire estimee et reelle")
+hold off
+
+%% Error Interval
+
+xTop    = vestx + 3 * sqrt(vestpx) ;
+xBottom = vestx - 3 * sqrt(vestpx) ;
+
+yTop    = vesty + 3 * sqrt(vestpy) ;
+yBottom = vesty - 3 * sqrt(vestpy) ;
