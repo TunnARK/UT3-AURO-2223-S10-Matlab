@@ -64,6 +64,14 @@ for k=1:N
    vestpy(k) = Pest{k}(2,1) ;
 end
 
+%% Error Interval
+
+xTop    = vestx + 3 * sqrt(vestpx) ;
+xBottom = vestx - 3 * sqrt(vestpx) ;
+
+yTop    = vesty + 3 * sqrt(vestpy) ;
+yBottom = vesty - 3 * sqrt(vestpy) ;
+
 %% Plot Xreel and Xestime
 figure(3)
 hold on
@@ -73,10 +81,24 @@ legend([p1 p2],'Xreel','Xestime');
 title("Comparaison entre trajectoire estimee et reelle")
 hold off
 
-%% Error Interval
+%% Plot Xestime Tops Bottoms along x and y
 
-xTop    = vestx + 3 * sqrt(vestpx) ;
-xBottom = vestx - 3 * sqrt(vestpx) ;
+figure(4)
+subplot(1,2,1)
+    hold on
+    p3 = plot( vestx(:)   );
+    p4 = plot( xTop(:)    );
+    p5 = plot( xBottom(:) );
+    legend([p3 p4 p5],'Xestime', 'Top(x)', 'Bottom(x)');
+    title("Estimated trajectory with error interval (along x)")
+    hold off
+subplot(1,2,2)
+    hold on
+    p6 = plot( vesty(:)   );
+    p7 = plot( yTop(:)    );
+    p8 = plot( yBottom(:) );
+    legend([p6 p7 p8],'Xestime', 'Top(y)', 'Bottom(y)');
+    title("Estimated trajectory with error interval (along y)")
+    hold off
 
-yTop    = vesty + 3 * sqrt(vestpy) ;
-yBottom = vesty - 3 * sqrt(vestpy) ;
+%%
