@@ -81,12 +81,77 @@ Co = ctrb(A,B)
 
 %% Etude de la fonction de transfert
 
-F=tf(EE) %deja sous la forme de Smith-Macmillan
+F=tf(EE) % fonction de transfert
 
-eig(F)
+eig(F) % calcul des pôles
 
-Z_colonne1=zero(F(1))
-Z_colonne2=zero(F(2))
+
+Z_colonne1=zero(F(1)) % valeur des zeros pour le transfert 1
+Z_colonne2=zero(F(2)) % valeur des zeros pour le transfert 2
+
+dcgain(F) %calcul du gain statique
+
+
+% Analyse de la reponse idicielle en mesurant h1
+
+%F represente la fonction de transfert dont h1 est mesuree en sortie
+
+figure(1)
+subplot(1,2,1)
+sgtitle('Réponse indicielle pour la hauteur h1')
+step(5e-5*F(1))
+
+subplot(1,2,2)
+step(2e-5*F(2))
+
+
+% Analyse de la reponse idicielle en mesurant h2
+
+C2=[0 1 0];
+EE2=ss(A,B,C2,D);
+F2=tf(EE2); %F2 represente la fonction de transfert dont h2 est mesuree en sortie
+
+figure(2)
+subplot(1,2,1)
+sgtitle('Réponse indicielle pour la hauteur h2')
+step(5e-5*F2(1))
+
+subplot(1,2,2)
+step(2e-5*F2(2))
+
+% Analyse de la reponse idicielle en mesurant h3
+C3=[0 0 1];
+EE3=ss(A,B,C2,D);
+F3=tf(EE3); %F3 represente la fonction de transfert dont h2 est mesuree en sortie
+
+figure(3)
+subplot(1,2,1)
+sgtitle('Réponse indicielle pour la hauteur h3')
+step(5e-5*F3(1))
+
+subplot(1,2,2)
+step(2e-5*F3(2))
+
+
+
+
+
+
+%% Methode de Bass-Gura
+
+q=[2;3];
+
+% Bt=B*q
+% 
+% rang_Bt=rank(Bt)
+% 
+% cmd_ABt=rank(ctrb(A,Bt))
+% 
+% p=[-1/30 -1/30, -1/30];
+% 
+% k=place(A,Bt,p)
+
+
 
 
 
