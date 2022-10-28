@@ -28,9 +28,10 @@ a32 = az32 * Sn * sqrt( 2*9.81 ) ;
 a20 = az20 * Sn * sqrt( 2*9.81 ) ;
 
 % Point Equilibre
-H2eq = ( ( Q1eq + Q2eq )/a20 )^2 ; % H2eq = 0.0299 H1eq_collegue = 0.01968
-H3eq = (Q1eq)^2/(a32)^2 + H2eq   ; % H3eq = 0.1084 H2eq_collegue = 0.0316
-H1eq = (Q1eq)^2/(a13)^2 + H3eq   ; % H1eq = 0.1897 H3eq_collegue = 0.1156
+H2eq = ( Q1eq^2 + Q2eq^2 + 2*Q1eq^2*Q2eq^2/a32 )/( a20^2 )  
+% H2eq = 0.0299 H1eq_collegue = 0.01968
+H3eq = (Q1eq)^2/(a32)^2 + H2eq    % H3eq = 0.1084 H2eq_collegue = 0.0316
+H1eq = (Q1eq)^2/(a13)^2 + H3eq    % H1eq = 0.1897 H3eq_collegue = 0.1156
 
 % Resistance
 R13 = 2 * sqrt( abs( H1eq - H3eq ) ) / a13 ;
@@ -110,7 +111,7 @@ FTxOLu = tf(xOLu) ; % transfer function already under SmithMacMillan Form
 
 %% Etude de la fonction de transfert
 
-eig(FTxOLu)
+eig(FTxOLu) ;
 
-Z_colonne1=zero(FTxOLu(1))
-Z_colonne2=zero(FTxOLu(2))
+Z_colonne1=zero(FTxOLu(1)) ;
+Z_colonne2=zero(FTxOLu(2)) ;
