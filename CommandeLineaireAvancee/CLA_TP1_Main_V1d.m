@@ -107,7 +107,7 @@ step(2e-5*F(2))
 
 % Analyse de la reponse idicielle en mesurant h2
 
-C2=[0 1 0];
+C2=[0 0 1];
 EE2=ss(A,B,C2,D);
 F2=tf(EE2); %F2 represente la fonction de transfert dont h2 est mesuree en sortie
 
@@ -116,12 +116,13 @@ subplot(1,2,1)
 sgtitle('Réponse indicielle pour la hauteur h2')
 step(5e-5*F2(1))
 
+
 subplot(1,2,2)
 step(2e-5*F2(2))
 
 % Analyse de la reponse idicielle en mesurant h3
-C3=[0 0 1];
-EE3=ss(A,B,C2,D);
+C3=[0 1 0];
+EE3=ss(A,B,C3,D);
 F3=tf(EE3); %F3 represente la fonction de transfert dont h2 est mesuree en sortie
 
 figure(3)
@@ -131,8 +132,6 @@ step(5e-5*F3(1))
 
 subplot(1,2,2)
 step(2e-5*F3(2))
-
-
 
 
 
