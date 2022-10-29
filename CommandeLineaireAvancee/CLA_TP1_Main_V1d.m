@@ -60,7 +60,7 @@ D = 0           ;
 
 EE = ss(A,B,C,D) ;
 
-%% Analyse de stabilite
+%% Analyse de stabilite du point d equilibre H0
 
 EEeig = eig(A) ;
 
