@@ -83,7 +83,7 @@ Co = ctrb(A,B)
 
 F=tf(EE) % fonction de transfert
 
-eig(F) % calcul des pôles
+eig(F) % calcul des poles
 
 
 Z_colonne1=zero(F(1)) % valeur des zeros pour le transfert 1
