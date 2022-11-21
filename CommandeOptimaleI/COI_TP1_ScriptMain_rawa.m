@@ -51,3 +51,20 @@ stepinfo(yCLu)
 
 step(yCLu)
 grid on
+
+%% Precompensation
+
+GainStat=dcgain(yCLu)
+
+yNCLu=(1/GainStat)*yCLu
+
+figure(3)
+step(yNCLu)
+title('Reponse indicielle de la BF avec gain de precompensation')
+stepinfo(yNCLu)
+
+
+%% Critere J parametre
+
+
+
