@@ -47,3 +47,15 @@ legend([p1 p2],'Xreel','Xestime');
 title("Comparaison des trajectoires reconstruites par le filtre et reelles")
 hold off
 
+
+%% Qualification de l estimation
+
+Xerr=X-xk1k; % erreur d estimation
+
+
+plot(T,Xerr(1,:))
+title('Tracé de l erreur d estimation')
+
+
+
+

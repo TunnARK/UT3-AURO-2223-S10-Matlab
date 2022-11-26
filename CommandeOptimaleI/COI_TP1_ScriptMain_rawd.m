@@ -128,6 +128,10 @@ Gain3=dcgain(EE_bf3)
 BF_precomp3=(1/Gain3)*EE_bf3
 VP_bf3=eig(BF_precomp3)
 
+[Gm1,Pm1,Wcg1,Wcp1] = margin(BF_precomp3)
+
+
+
 figure(5)
 nyquist(BF_precomp3)
 

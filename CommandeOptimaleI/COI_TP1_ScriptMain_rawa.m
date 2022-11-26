@@ -74,14 +74,15 @@ Rloop = 100 ;
 figure(2)
 title('Evolution du gain de la BF en fonction de Q')
 for i = 1:length(vecQ)
+    hold on     
     Qloop = vecQ(i)*eye(2) ;
     [Ploop, Lloop, Gloop] = care(A,B,Qloop,Rloop) ;
     yCLuloop = ss(A-B*Gloop,B,C,D) ;
     Sloop = stepinfo(yCLuloop) ;
     vecRiseTime(i) = Sloop.RiseTime ;
-    step(yCLuloop)
-    hold on
+    step(yCLuloop)  
 end
+
 hold off
 
 figure(3)
