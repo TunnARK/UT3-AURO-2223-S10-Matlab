@@ -135,10 +135,24 @@ VP_bf3=eig(BF_precomp3)
 figure(5)
 nyquist(BF_precomp3)
 
+
 figure(6)
 step(BF_precomp3)
 title('Réponse indicielle du système en BF pour Q et R choisies')
 stepinfo(BF_precomp3)
 
+%% Commande LQR sur le systeme augmente
+
+[P3,K3,L3]=icare(A,B,Q3,R3,[],[],G3) 
+
+Aa=[A-B*K3(1) -B*K(2); C 0]
+Ba=[0;0;1]
+
+Ca=[0 0 1];
 
 
+EE_ag=ss(Aa,Ba,Ca,D)
+
+figure(7)
+step(EE_ag)
+title('Réponse indicielle en utilisant la commande LGR sur le système étendu')
