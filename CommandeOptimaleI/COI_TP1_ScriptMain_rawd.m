@@ -123,6 +123,34 @@ step(EE_bf5)
 title('Réponse indicielle avec Q=diag[1 100]')
 
 
+
+%% Analyse de l impact de Q sur le temps de reponse
+
+% Initialisation
+vecQ = [1 1.5 2 2.5 3 4 6 10 GainStat 20 100 1000] ;
+vecRiseTime = [] ;
+Rloop = 100 ;
+
+figure(5)
+title('Evolution du gain de la BF en fonction de Q')
+for i = 1:length(vecQ)
+    hold on     
+    Qloop = vecQ(i)*eye(2) ;
+    [Ploop, Lloop, Gloop] = care(A,B,Qloop,Rloop) ;
+    yCLuloop = ss(A-B*Gloop,B,C,D) ;
+    Sloop = stepinfo(yCLuloop) ;
+    vecRiseTime(i) = Sloop.RiseTime ;
+    step(yCLuloop)  
+end
+
+hold off
+
+
+figure(6)
+plot(vecQ, vecRiseTime)
+title('Evolution du temps de réponse en fonction de Q')
+
+
 %% Etude des performances et de la stabilite de la boucle fermee pour un R et un Q choisis
 Gain3=dcgain(EE_bf3)
 BF_precomp3=(1/Gain3)*EE_bf3
@@ -132,11 +160,11 @@ VP_bf3=eig(BF_precomp3)
 
 
 
-figure(5)
+figure(7)
 nyquist(BF_precomp3)
 
 
-figure(6)
+figure(8)
 step(BF_precomp3)
 title('Réponse indicielle du système en BF pour Q et R choisies')
 stepinfo(BF_precomp3)
@@ -164,11 +192,11 @@ Ca=[C 0]
 
 EE_ag=ss(Aa,Ba,Ca,D)
 
-figure(7)
+figure(9)
 step(EE_ag)
 stepinfo(EE_ag)
 title('Réponse indicielle en utilisant la commande LQR sur le système étendu')
 
-figure(8)
+figure(10)
 [Gmr,Pmr,Wcgr,Wcpr] = margin(EE_ag)
 nyquist(EE_ag)
