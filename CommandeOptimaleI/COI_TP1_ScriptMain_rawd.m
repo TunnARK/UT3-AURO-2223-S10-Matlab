@@ -169,6 +169,6 @@ step(EE_ag)
 stepinfo(EE_ag)
 title('Réponse indicielle en utilisant la commande LQR sur le système étendu')
 
-
+figure(8)
 [Gmr,Pmr,Wcgr,Wcpr] = margin(EE_ag)
 nyquist(EE_ag)
