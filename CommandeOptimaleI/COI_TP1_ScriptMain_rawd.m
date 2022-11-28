@@ -143,16 +143,28 @@ stepinfo(BF_precomp3)
 
 %% Commande LQR sur le systeme augmente
 
-[P3,K3,L3]=icare(A,B,Q3,R3,[],[],G3) 
+Rr=1;
 
-Aa=[A-B*K3(1) -B*K(2); C 0]
-Ba=[0;0;1]
+Ar=[A zeros(2,1) ; C 0]
 
-Ca=[0 0 1];
+Br=[B; 0]
 
+Cr=[zeros(1,2) 1]
+
+Qr=3/2*eye(3)
+Gr=-Br*(1/Rr)*Br';
+
+[Pr,Kr,Lr]=icare(Ar,Br,Qr,Rr,[],[],Gr)
+
+Aa=[A-B*Kr(1,1:2) -B*Kr(1,3); C 0 ]
+
+Ba=[zeros(2,1); -1]
+
+Ca=[C 0]
 
 EE_ag=ss(Aa,Ba,Ca,D)
 
 figure(7)
 step(EE_ag)
-title('Réponse indicielle en utilisant la commande LGR sur le système étendu')
+stepinfo(EE_ag)
+title('Réponse indicielle en utilisant la commande LQR sur le système étendu')
