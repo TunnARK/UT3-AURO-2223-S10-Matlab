@@ -40,3 +40,12 @@ EE=ss(A,B,C,D)
 O=obsv(A,C);
 
 observabilite=rank(O)
+
+
+%% Commande optimale sans considerer la fuite
+
+Q=eye(2);
+R=eye(2);
+P=Q;
+
+
