@@ -5,10 +5,10 @@
 
 close all
 
-%% Plan de phase 
-% Recuperation des variables issues de Simulink et trace 
-%lot(out.simout.signals.values(:,1),out.simout.signals.values(:,2))
-%title('Plan de phase pour une CI=[10;10]')
+% %% Plan de phase 
+% %Recuperation des variables issues de Simulink et trace 
+% plot(out.simout.signals.values(:,1),out.simout.signals.values(:,2))
+% title('Plan de phase pour une CI=[10;10]')
 
 
 %% Dynamique en boucle fermee

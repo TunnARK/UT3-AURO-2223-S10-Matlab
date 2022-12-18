@@ -58,4 +58,3 @@ title('Tracé de l erreur d estimation')
 
 
 
-
