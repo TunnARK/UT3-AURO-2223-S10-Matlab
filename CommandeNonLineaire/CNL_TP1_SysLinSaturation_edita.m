@@ -28,7 +28,7 @@ Tstep = 0.001        ;
 time  = 0:Tstep:Tend ;
 
 % Plotting random trajectories
-for i = 0:1:500
+for i = 0:1:10000
     [tout,xout] = ode45(@fcNL, time, [-3+6*rand; -3+6*rand]) ;
     plot(xout(:,1),xout(:,2))
     axis([-3 3 -3 3]);
