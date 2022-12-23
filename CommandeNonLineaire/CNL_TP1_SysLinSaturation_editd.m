@@ -40,9 +40,14 @@ time=0:Tstep:Tend;
 
 
 %% Recherche d une fonction de Lyapunov
-
+A=[0 1 ; -1 -1]; %Matrice dynamique
 Q = eye(2);
-P = lyap(A,Q)
+eig(Q) %Verifiier si Q est definie positive
+P = inv(lyap(A,Q)) %Pour resoudre A'S+SA+Q=0
+eig(P) %Verifier si on a une fonction candidate
+V_prime=A'*P+P*A %Derivee de la fonctionnelle
+eig(V_prime) %verifier la derivee est definie negative
+
 
 
 %% Definition de la fonction pour estimer le basser d attraction
