@@ -76,7 +76,7 @@ C4 = [ 0 0 0     Kg ;
        0 0 Kr*Ks 0  ];
 D4 = [ 0 ];
 
-uBOy4 = ss(A4, B4, C4, D4)
+uBOy4 = ss(A4, B4, C4, D4) ;
 
 % Fonction Transfert des modeles 4 a 2
 FT4 = zpk(ss(A4, B4, eye(4), zeros(4,1))) ;
@@ -90,6 +90,7 @@ A3D = [ 1 0 0     ;
         0 1 0     ;
         0 0 1     ];
 A3 = A3G * A4 * A3D ;
+% erreur sur A3 !
 
 B3G = [ 1 0 0 0 ;
         0 0 1 0 ;
@@ -99,7 +100,7 @@ C3 = [ 0 0     Kg ;
        0 Kr*Ks 0  ];
 D3 = [ 0 ];
 
-uBOy3 = ss(A3, B3, C3, D3)  
+uBOy3 = ss(A3, B3, C3, D3) ;
 
 % Niveau 2
 A2G = [ 0 1 0 ;
@@ -115,7 +116,7 @@ C2 = [ Kg  0     ;
        0   Kr*Ks ];
 D2 = [ 0 ];
 
-uBOy2 = ss(A2, B2, C2, D2)
+uBOy2 = ss(A2, B2, C2, D2) ;
 
 
 %% Observateur
@@ -127,7 +128,7 @@ poles_des = [-10; -20]; % tr = 0.3s pour -10 et -15 pour un pole + rapide
 G2 = acker(A2', C2(1,:)', poles_des)';
 
 % systeme obs
-uBOy_obs = ss(A2-G2*C2(1,:), [G2 B2], eye(2), D2)
+uBOy_obs = ss(A2-G2*C2(1,:), [G2 B2], eye(2), D2);
 
 %% Retour Etat avec effet integral
 
@@ -154,4 +155,4 @@ Drti=0;
 
 Systrti=ss(Arti,Brti,Crti,Drti);
 
-step(Systrti)
+step(Systrti);
