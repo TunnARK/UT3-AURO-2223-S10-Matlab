@@ -49,3 +49,5 @@ drawImage(s_o(1),s_o(2),s_o(3),s_o(4),s_o(5),s_o(6),s_o(7),s_o(8)) ;
 % Affichage des indices visuels desires
 drawImage(s_b(1),s_b(2),s_b(3),s_b(4),s_b(5),s_b(6),s_b(7),s_b(8)) ;
 
+
+%% Matrice d'interaction
