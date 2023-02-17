@@ -1,4 +1,4 @@
-function [s_o] = visu(Xm,Ym,theta,qpl,OP1_R,OP2_R,OP3_R,OP4_R)
+function [s_o,opc] = visu(Xm,Ym,theta,qpl,OP1_R,OP2_R,OP3_R,OP4_R)
 
 %% Declaration des constantes
 % Coordonnees de C dans Rp
@@ -39,6 +39,8 @@ OP1_C = T_RC_R * OP1_R ;
 OP2_C = T_RC_R * OP2_R ;
 OP3_C = T_RC_R * OP3_R ;
 OP4_C = T_RC_R * OP4_R ;
+
+opc = [ OP1_C OP2_C OP3_C OP4_C ] ;
 
 %% Projection perpesctive
 % Xp = f/z * xp

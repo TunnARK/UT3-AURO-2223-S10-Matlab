@@ -32,12 +32,12 @@ theta = 0 ;
 % Angle de la platine
 qpl = 0 ;
 % Position du robot
-Xm = 6,9 ; Ym = 2 ;
+Xm = 6.9 ; Ym = 2 ;
 % Vecteur de configuration
 Q = [Xm; Ym; theta; qpl] ;
 
 %% Appel fonctions visu
-s_o = visu(Xm,Ym,theta,qpl,OP1_R,OP2_R,OP3_R,OP4_R) ;
+[s_o,opc] = visu(Xm,Ym,theta,qpl,OP1_R,OP2_R,OP3_R,OP4_R) ;
 
 %% Affichages
 % Affichage des points cibles
